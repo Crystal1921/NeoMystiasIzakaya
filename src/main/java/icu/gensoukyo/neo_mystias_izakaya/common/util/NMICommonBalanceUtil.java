@@ -85,11 +85,19 @@ public class NMICommonBalanceUtil {
     }
 
     public static void set(Player player, Identifier unit, int count, boolean simulate) {
-        insert(player, unit, count - (int) get(player, unit), simulate);
+        if (count - (int) get(player, unit) > 0) {
+            insert(player, unit, count - (int) get(player, unit), simulate);
+        } else {
+            extract(player, unit, count - (int) get(player, unit), simulate);
+        }
     }
 
     public static void set(Player player, Identifier unit, int count, boolean simulate, Identifier reason, String from, String to) {
-        insert(player, unit, count - (int) get(player, unit), simulate, reason, from, to);
+        if (count - (int) get(player, unit) > 0) {
+            insert(player, unit, count - (int) get(player, unit), simulate, reason, from, to);
+        } else {
+            extract(player, unit, count - (int) get(player, unit), simulate, reason, from, to);
+        }
     }
 
     public static int insert(Player player, Identifier unit, int count, boolean simulate) {
