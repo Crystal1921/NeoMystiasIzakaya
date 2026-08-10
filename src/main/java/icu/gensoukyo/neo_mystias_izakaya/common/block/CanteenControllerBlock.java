@@ -26,7 +26,6 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -37,13 +36,13 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 
-public class CanteenControllerBlock extends BaseEntityBlock {
+public class CanteenControllerBlock extends NMIInvisibleBlock {
     public static final EnumProperty<CanteenPart> PART = EnumProperty.create("part", CanteenPart.class);
     public static final MapCodec<CanteenControllerBlock> CODEC = simpleCodec(CanteenControllerBlock::new);
 
     public CanteenControllerBlock(Properties properties) {
         super(properties.noOcclusion());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultState()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
                 .setValue(PART, CanteenPart.MAIN)
         );
@@ -61,8 +60,8 @@ public class CanteenControllerBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
-        return state.getValue(PART) == CanteenPart.MAIN ? RenderShape.MODEL : RenderShape.INVISIBLE;
+    protected void appendBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(BlockStateProperties.HORIZONTAL_FACING, PART);
     }
 
     @Override
@@ -74,11 +73,6 @@ public class CanteenControllerBlock extends BaseEntityBlock {
         return level.getBlockState(relative).canBeReplaced(pContext) && level.getWorldBorder().isWithinBounds(relative)
                 ? defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
                 : null;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(BlockStateProperties.HORIZONTAL_FACING, PART);
     }
 
     @Override
@@ -105,7 +99,7 @@ public class CanteenControllerBlock extends BaseEntityBlock {
         super.setPlacedBy(level, pos, state, by, itemStack);
         if (!level.isClientSide()) {
             BlockPos otherPos = pos.relative(state.getValue(BlockStateProperties.HORIZONTAL_FACING).getCounterClockWise());
-            level.setBlock(otherPos, state.setValue(PART, CanteenPart.EXTENSION), 3);
+            level.setBlock(otherPos, state.setValue(PART, CanteenPart.EXTENSION).setValue(INVISIBLE, true), 3);
             level.updateNeighborsAt(pos, Blocks.AIR);
             state.updateNeighbourShapes(level, pos, 3);
         }

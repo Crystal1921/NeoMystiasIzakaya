@@ -19,12 +19,12 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.Nullable;
 
-public class CreativeIncubatorBlock extends BaseEntityBlock {
+public class CreativeIncubatorBlock extends NMIInvisibleBlock {
     public static final MapCodec<CreativeIncubatorBlock> CODEC = simpleCodec(CreativeIncubatorBlock::new);
 
     public CreativeIncubatorBlock(Properties properties) {
         super(properties.noOcclusion());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultState()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
         );
     }
@@ -46,7 +46,7 @@ public class CreativeIncubatorBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    protected void appendBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(BlockStateProperties.HORIZONTAL_FACING);
     }
 }

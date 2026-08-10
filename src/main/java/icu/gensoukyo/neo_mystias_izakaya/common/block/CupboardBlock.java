@@ -23,12 +23,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.Nullable;
 
-public class CupboardBlock extends BaseEntityBlock {
+public class CupboardBlock extends NMIInvisibleBlock {
     public static final MapCodec<CupboardBlock> CODEC = simpleCodec(CupboardBlock::new);
 
     public CupboardBlock(Properties properties) {
         super(properties.noOcclusion());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultState()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
         );
     }
@@ -65,7 +65,7 @@ public class CupboardBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    protected void appendBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(BlockStateProperties.HORIZONTAL_FACING);
     }
 }
