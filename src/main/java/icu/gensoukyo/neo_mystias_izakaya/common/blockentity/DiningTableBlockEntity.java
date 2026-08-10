@@ -86,6 +86,11 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
     @Getter
     private IzakayaOrder currentOrder = IzakayaOrder.EMPTY;
     /**
+     * 村民渲染随机种子（每次入座新订单时重新生成，确保每一单都不同）
+     */
+    @Getter
+    private long villagerSeed;
+    /**
      * 餐桌序号（由控制器分配，从 1 开始；-1 表示未绑定）
      */
     @Getter
@@ -247,6 +252,7 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
         if (!this.currentOrder.equals(IzakayaOrder.EMPTY)) {
             output.store("Order", IzakayaOrder.CODEC, this.currentOrder);
         }
+        output.putLong("VillagerSeed", this.villagerSeed);
     }
 
     // === 网络同步 ===
@@ -264,6 +270,7 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
         this.cooldownTicks = input.getIntOr("CooldownTicks", 0);
         this.controllerPos = input.read("ControllerPos", BlockPos.CODEC).orElse(BlockPos.ZERO);
         this.currentOrder = input.read("Order", IzakayaOrder.CODEC).orElse(IzakayaOrder.EMPTY);
+        this.villagerSeed = input.getLongOr("VillagerSeed", 0L);
     }
 
     @Override
@@ -286,6 +293,7 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
             if (!this.currentOrder.equals(IzakayaOrder.EMPTY)) {
                 output.store("Order", IzakayaOrder.CODEC, this.currentOrder);
             }
+            output.putLong("VillagerSeed", this.villagerSeed);
             return output.buildResult();
         }
     }
@@ -299,6 +307,8 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
         this.isOccupied = true;
         this.customerId = order.rareCustomer();
         this.currentOrder = order;
+        // 为每一单生成新的随机种子，客户端据此渲染不同的村民（职业/变种/朝向）
+        this.villagerSeed = this.level != null ? this.level.getRandom().nextLong() : RandomSource.create().nextLong();
         markUpdated();
     }
 
