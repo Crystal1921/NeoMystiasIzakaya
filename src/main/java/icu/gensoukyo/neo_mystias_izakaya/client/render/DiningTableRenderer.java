@@ -6,7 +6,6 @@
 package icu.gensoukyo.neo_mystias_izakaya.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import icu.gensoukyo.neo_mystias_izakaya.client.render.state.DiningTableRenderState;
 import icu.gensoukyo.neo_mystias_izakaya.common.blockentity.DiningTableBlockEntity;
 import net.minecraft.client.Minecraft;
@@ -63,16 +62,15 @@ public class DiningTableRenderer implements BlockEntityRenderer<DiningTableBlock
         poseStack.translate(1D, 0D, 0D);
         diningTableRenderState.cuisineRenderState.submit(poseStack, submitNodeCollector, diningTableRenderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
         poseStack.translate(-0.5D,2D,0D);
-        poseStack.mulPose(Axis.ZN.rotationDegrees(180));
         poseStack.scale(0.1F,0.1F,0.1F);
 
         int index = diningTableRenderState.index;
         if (index >= 0) {
             MutableComponent literal = Component.literal(String.valueOf(index));
-            submitNodeCollector.submitText(poseStack, 0,0, literal.getVisualOrderText(), false, Font.DisplayMode.NORMAL, diningTableRenderState.lightCoords,0xFFFFFFFF, 0,0);
-            poseStack.mulPose(Axis.YN.rotationDegrees(180));
-            poseStack.translate(-font.width(literal), 0.0D, 0.0D);
-            submitNodeCollector.submitText(poseStack, 0,0, literal.getVisualOrderText(), false, Font.DisplayMode.NORMAL, diningTableRenderState.lightCoords,0xFFFFFFFF, 0,0);
+            // 面向玩家摄像机的 billboard 渲染（参照 vanilla 名牌 NameTagFeatureRenderer）
+            poseStack.mulPose(cameraRenderState.orientation);
+            poseStack.scale(1.0F, -1.0F, 1.0F);
+            submitNodeCollector.submitText(poseStack, -font.width(literal) / 2.0F, 0.0F, literal.getVisualOrderText(), false, Font.DisplayMode.NORMAL, diningTableRenderState.lightCoords, 0xFFFFFFFF, 0, 0);
         }
         poseStack.popPose();
     }
