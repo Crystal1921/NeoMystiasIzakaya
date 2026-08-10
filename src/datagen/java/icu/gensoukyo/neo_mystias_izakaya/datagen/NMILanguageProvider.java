@@ -9,7 +9,6 @@ import com.google.gson.JsonObject;
 import icu.gensoukyo.neo_mystias_izakaya.NeoMystiasIzakaya;
 import icu.gensoukyo.neo_mystias_izakaya.client.gui.screen.StoreScreen;
 import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.registry.NMIMEBlocks;
-import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.registry.NMIMECreativeModeTabs;
 import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.registry.NMIMEItems;
 import icu.gensoukyo.neo_mystias_izakaya.compat.jade.MystiaJadePlugin;
 import icu.gensoukyo.neo_mystias_izakaya.content.cooking.Kitchenware;
@@ -58,7 +57,6 @@ public class NMILanguageProvider implements DataProvider {
         this.addItemGroup(NMICreativeModeTabs.CUISINES_ID, "Neo Mystia's Izakaya - Cuisines", "新夜雀食堂 - 料理");
         this.addItemGroup(NMICreativeModeTabs.INGREDIENT_ID, "Neo Mystia's Izakaya - Ingredient", "新夜雀食堂 - 食材");
         this.addItemGroup(NMICreativeModeTabs.MAIN_ID, "Neo Mystia's Izakaya - Main", "新夜雀食堂 - 主体");
-        this.addItemGroup(NMIMECreativeModeTabs.AE2_ID, "Neo Mystia's Izakaya - AE2", "新夜雀食堂 - AE2");
 
         this.add(NMIBlocks.BOILING_POT, "Boiling Pot", "煮锅");
         this.add(NMIBlocks.GRILL, "Grill", "烤架");
