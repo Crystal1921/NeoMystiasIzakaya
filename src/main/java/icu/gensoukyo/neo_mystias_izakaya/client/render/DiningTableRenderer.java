@@ -123,29 +123,33 @@ public class DiningTableRenderer implements BlockEntityRenderer<DiningTableBlock
         // 普通客人（isRare=false）时，在餐桌旁渲染一个村民（随机职业 + 生物群系变种）
         VillagerData villagerData = diningTableRenderState.villagerData;
         if (villagerData != null) {
-            poseStack.pushPose();
-            // 随机朝向：围绕餐桌中心、距离 VILLAGER_DISTANCE 放置，并面向餐桌
-            float angle = diningTableRenderState.villagerAngle;
-            double px = 0.5D + VILLAGER_DISTANCE * Math.cos(angle);
-            double pz = 0.5D + VILLAGER_DISTANCE * Math.sin(angle);
-            poseStack.translate(px, 0.0D, pz);
-            // 从村民指向餐桌中心的方向 → Minecraft 朝向（0=南，顺时针）
-            float yaw = (float) Math.toDegrees(Math.atan2(px - 0.5D, 0.5D - pz));
-            // 标准实体模型变换（参照 LivingEntityRenderer.submit）：转向餐桌 + 立正 + 脚踩地面
-            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
-            poseStack.scale(-1.0F, -1.0F, 1.0F);
-            poseStack.translate(0.0F, -1.501F, 0.0F);
-            VillagerRenderState villagerState = new VillagerRenderState();
-            villagerState.lightCoords = diningTableRenderState.lightCoords;
-            villagerState.villagerData = villagerData;
-            // 本体基础贴图（含头部/面部），参照 VillagerRenderer.getTextureLocation。
-            // 职业层内部的基础变种贴图会使用无头模型（createNoHatModel 移除了 head），
-            // 所以必须先渲染带头的完整本体，否则面部/头部皮肤会缺失。
-            submitNodeCollector.submitModel(villagerModel, villagerState, poseStack, VILLAGER_BASE_TEXTURE, diningTableRenderState.lightCoords, OverlayTexture.NO_OVERLAY, 0, null);
-            // 职业层内部会依次渲染：生物群系变种 + 职业 + 职业等级
-            villagerProfessionLayer.submit(poseStack, submitNodeCollector, diningTableRenderState.lightCoords, villagerState, 0.0F, 0.0F);
-            poseStack.popPose();
+            renderVillager(diningTableRenderState, poseStack, submitNodeCollector, villagerData);
         }
+    }
+
+    private void renderVillager(DiningTableRenderState diningTableRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, VillagerData villagerData) {
+        poseStack.pushPose();
+        // 随机朝向：围绕餐桌中心、距离 VILLAGER_DISTANCE 放置，并面向餐桌
+        float angle = diningTableRenderState.villagerAngle;
+        double px = 0.5D + VILLAGER_DISTANCE * Math.cos(angle);
+        double pz = 0.5D + VILLAGER_DISTANCE * Math.sin(angle);
+        poseStack.translate(px, 0.0D, pz);
+        // 从村民指向餐桌中心的方向 → Minecraft 朝向（0=南，顺时针）
+        float yaw = (float) Math.toDegrees(Math.atan2(px - 0.5D, 0.5D - pz));
+        // 标准实体模型变换（参照 LivingEntityRenderer.submit）：转向餐桌 + 立正 + 脚踩地面
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
+        poseStack.scale(-1.0F, -1.0F, 1.0F);
+        poseStack.translate(0.0F, -1.501F, 0.0F);
+        VillagerRenderState villagerState = new VillagerRenderState();
+        villagerState.lightCoords = diningTableRenderState.lightCoords;
+        villagerState.villagerData = villagerData;
+        // 本体基础贴图（含头部/面部），参照 VillagerRenderer.getTextureLocation。
+        // 职业层内部的基础变种贴图会使用无头模型（createNoHatModel 移除了 head），
+        // 所以必须先渲染带头的完整本体，否则面部/头部皮肤会缺失。
+        submitNodeCollector.submitModel(villagerModel, villagerState, poseStack, VILLAGER_BASE_TEXTURE, diningTableRenderState.lightCoords, OverlayTexture.NO_OVERLAY, 0, null);
+        // 职业层内部会依次渲染：生物群系变种 + 职业 + 职业等级
+        villagerProfessionLayer.submit(poseStack, submitNodeCollector, diningTableRenderState.lightCoords, villagerState, 0.0F, 0.0F);
+        poseStack.popPose();
     }
 
     @Override

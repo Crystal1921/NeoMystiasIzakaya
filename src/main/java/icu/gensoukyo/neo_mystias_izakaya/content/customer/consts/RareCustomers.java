@@ -32,7 +32,7 @@ public final class RareCustomers {
     public static final Identifier NITORI_KAWASHIRO = NeoMystiasIzakaya.id("customer/kawasiro_nitori");
     public static final Identifier MOMIJI_INUBASHIRI = NeoMystiasIzakaya.id("customer/inubashiri_momizi");
     public static final Identifier SANAE_KOCHIYA = NeoMystiasIzakaya.id("customer/kochiya_sanae");
-    public static final Identifier ALICE = NeoMystiasIzakaya.id("customer/alice");
+    public static final Identifier ALICE_MARGATROID = NeoMystiasIzakaya.id("customer/alice_margatroid");
     public static final Identifier NARUMI_YATADERA = NeoMystiasIzakaya.id("customer/yatadera_narumi");
     public static final Identifier YAMAME_KURODANI = NeoMystiasIzakaya.id("customer/kurodani_yamame");
     public static final Identifier PARSEE_MIZUHASHI = NeoMystiasIzakaya.id("customer/mizuhashi_parsee");
@@ -93,7 +93,7 @@ public final class RareCustomers {
             NITORI_KAWASHIRO,
             MOMIJI_INUBASHIRI,
             SANAE_KOCHIYA,
-            ALICE,
+            ALICE_MARGATROID,
             NARUMI_YATADERA,
             YAMAME_KURODANI,
             PARSEE_MIZUHASHI,
