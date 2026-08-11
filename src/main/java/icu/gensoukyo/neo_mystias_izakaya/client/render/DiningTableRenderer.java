@@ -21,7 +21,6 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.VillagerProfessionLayer;
 import net.minecraft.client.renderer.entity.state.VillagerRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
@@ -48,7 +47,9 @@ import org.jspecify.annotations.Nullable;
 public class DiningTableRenderer implements BlockEntityRenderer<DiningTableBlockEntity, DiningTableRenderState> {
 
     private static final Identifier VILLAGER_BASE_TEXTURE = Identifier.withDefaultNamespace("textures/entity/villager/villager.png");
-    /** 村民距离餐桌中心的水平距离 */
+    /**
+     * 村民距离餐桌中心的水平距离
+     */
     private static final double VILLAGER_DISTANCE = 1.0;
 
     private final ItemModelResolver itemModelResolver;
@@ -131,13 +132,13 @@ public class DiningTableRenderer implements BlockEntityRenderer<DiningTableBlock
     public void submit(DiningTableRenderState diningTableRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         Font font = Minecraft.getInstance().font;
         poseStack.pushPose();
-        poseStack.scale(0.5F,0.5F,0.5F);
+        poseStack.scale(0.5F, 0.5F, 0.5F);
         poseStack.translate(0.5D, 2.5D, 1D);
         diningTableRenderState.beverageRenderState.submit(poseStack, submitNodeCollector, diningTableRenderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
         poseStack.translate(1D, 0D, 0D);
         diningTableRenderState.cuisineRenderState.submit(poseStack, submitNodeCollector, diningTableRenderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-        poseStack.translate(-0.5D,2D,0D);
-        poseStack.scale(0.1F,0.1F,0.1F);
+        poseStack.translate(-0.5D, 2D, 0D);
+        poseStack.scale(0.1F, 0.1F, 0.1F);
 
         int index = diningTableRenderState.index;
         if (index >= 0) {
@@ -167,7 +168,7 @@ public class DiningTableRenderer implements BlockEntityRenderer<DiningTableBlock
         poseStack.pushPose();
         poseStack.translate(px, 0.0D, pz);
         // 因为 TLM 的 MaidRenderer 不读取标准 bodyRot，需直接旋转 poseStack
-        poseStack.mulPose(Axis.YP.rotationDegrees(- yaw));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-yaw));
         if (diningTableRenderState.maidRenderState != null) {
             entityRenderDispatcher.submit(diningTableRenderState.maidRenderState, cameraRenderState, 0.0D, 0.0D, 0.0D, poseStack, submitNodeCollector);
         }

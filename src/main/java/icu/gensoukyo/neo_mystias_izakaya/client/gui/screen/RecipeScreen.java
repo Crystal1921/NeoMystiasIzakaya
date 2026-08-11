@@ -55,7 +55,6 @@ import static icu.gensoukyo.neo_mystias_izakaya.client.gui.screen.KitchenwareScr
 public class RecipeScreen extends Screen {
     public static final int POSITIVE_IN_COLOR = 0xFFFBEECB;
     public static final int POSITIVE_OUT_COLOR = 0xFF593B1F;
-    public static final int TEXT_COLOR = 0xFFD0A680;
     // 标签列表布局常量
     public static final int TAG_OFFSET_X = 13;
     public static final int TAG_OFFSET_Y = 28;

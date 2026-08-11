@@ -12,7 +12,10 @@ import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.registry.NMIMEBlocks;
 import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.registry.NMIMEItems;
 import icu.gensoukyo.neo_mystias_izakaya.compat.jade.MystiaJadePlugin;
 import icu.gensoukyo.neo_mystias_izakaya.content.cooking.Kitchenware;
-import icu.gensoukyo.neo_mystias_izakaya.content.customer.consts.*;
+import icu.gensoukyo.neo_mystias_izakaya.content.customer.consts.CommonCustomers;
+import icu.gensoukyo.neo_mystias_izakaya.content.customer.consts.CustomerEvaluationLevels;
+import icu.gensoukyo.neo_mystias_izakaya.content.customer.consts.CustomerLocations;
+import icu.gensoukyo.neo_mystias_izakaya.content.customer.consts.RareCustomers;
 import icu.gensoukyo.neo_mystias_izakaya.content.tag.consts.NMIBeveragesTags;
 import icu.gensoukyo.neo_mystias_izakaya.content.tag.consts.NMICuisinesTags;
 import icu.gensoukyo.neo_mystias_izakaya.datagen.consts.CommonCustomersChat;
@@ -66,8 +69,8 @@ public class NMILanguageProvider implements DataProvider {
         this.add(NMIBlocks.DINING_TABLE, "Dining Table", "餐桌");
         this.add(NMIBlocks.CUPBOARD, "CupBoard", "橱柜");
         this.add(NMIBlocks.CREATIVE_CUPBOARD, "CupBoard (Creative)", "橱柜 (创造)");
-        this.add(NMIBlocks.INCUBATOR,"Incubator","保温箱");
-        this.add(NMIBlocks.CREATIVE_INCUBATOR,"Incubator (Creative)","保温箱 (创造)");
+        this.add(NMIBlocks.INCUBATOR, "Incubator", "保温箱");
+        this.add(NMIBlocks.CREATIVE_INCUBATOR, "Incubator (Creative)", "保温箱 (创造)");
         this.add(NMIMEBlocks.ME_CUPBOARD, "CupBoard (ME)", "橱柜 (ME)");
         this.add(NMIMEBlocks.ME_INCUBATOR, "Incubator (ME)", "保温箱 (ME)");
 
@@ -84,7 +87,7 @@ public class NMILanguageProvider implements DataProvider {
         this.add(NMIMainItems.CUPBOARD, "CupBoard", "橱柜");
         this.add(NMIMainItems.CREATIVE_CUPBOARD, "CupBoard (Creative)", "橱柜 (创造)");
         this.add(NMIMainItems.INCUBATOR, "Incubator", "保温箱");
-        this.add(NMIMainItems.CREATIVE_INCUBATOR, "Incubator (Creative)", "保温箱 (创造)");;
+        this.add(NMIMainItems.CREATIVE_INCUBATOR, "Incubator (Creative)", "保温箱 (创造)");
         this.add(NMIMEItems.ME_CUPBOARD, "CupBoard (ME)", "橱柜 (ME)");
         this.add(NMIMEItems.ME_INCUBATOR, "Incubator (ME)", "保温箱 (ME)");
 
@@ -182,7 +185,6 @@ public class NMILanguageProvider implements DataProvider {
         this.add("task.neo_mystias_izakaya.mystias_izakaya_cuisine.desc", "Serve cuisines for customers", "为客人提供料理");
         this.add("task.neo_mystias_izakaya.mystias_izakaya_cook", "Cuisine Cooking", "料理烹饪");
         this.add("task.neo_mystias_izakaya.mystias_izakaya_cook.desc", "Cook cuisines for customers", "为客人烹饪料理");
-        
 
 
         this.add("blockentity.neo_mystias_izakaya.cupboard", "CupBoard", "橱柜");
@@ -198,7 +200,7 @@ public class NMILanguageProvider implements DataProvider {
         this.add(Kitchenware.STEAMER_ID.toLanguageKey("rei"), "Steamer", "蒸锅");
         this.add(Kitchenware.CUTTING_BOARD_ID.toLanguageKey("rei"), "Cutting Board", "料理台");
 
-        this.addJade(MystiaJadePlugin.KITCHENWARE_DATA_PROVIDER,"Kitchenware","厨具");
+        this.addJade(MystiaJadePlugin.KITCHENWARE_DATA_PROVIDER, "Kitchenware", "厨具");
     }
 
     private void addTagTranslations() {
@@ -1192,7 +1194,7 @@ public class NMILanguageProvider implements DataProvider {
         this.addCustomer(RareCustomers.REMILIA_SCARLET, "Remilia Scarlet", "蕾米莉亚");
         this.addCustomer(RareCustomers.YOUMU_KONPAKU, "Youmu Konpaku", "魂魄妖梦");
         this.addCustomer(RareCustomers.YUYUKO_SAIGYOUJI, "Yuyuko Saigyouji", "西行寺幽幽子");
-        this.addCustomer(RareCustomers.MENG_CHENGGUO, "Meng Chengguo", "萌澄果");
+        this.addCustomer(RareCustomers.MOESUMIKA, "Meng Chengguo", "萌澄果");
         this.addCustomer(RareCustomers.THREE_FAIRIES, "Three Fairies", "蹦蹦跳跳的三妖精");
         this.addCustomer(RareCustomers.RIN_SATSUKI, "Rin Satsuki", "冴月麟");
         this.addCustomer(RareCustomers.SHIO_TACHISORA, "Shio Tachisora", "立空汐");
@@ -1351,9 +1353,9 @@ public class NMILanguageProvider implements DataProvider {
         this.addCustomerDescriptionLevel(RareCustomers.YUYUKO_SAIGYOUJI, "1", "", "差点儿吞噬了幻想乡的可怕的家伙。原以为恢复神志后就会世界和平，结果一见面就想吃了我？！现在偶尔也会到食堂用餐，有时候会看着我咽口水…我这辈子都不想再见到这个亡灵。");
         this.addCustomerDescriptionLevel(RareCustomers.YUYUKO_SAIGYOUJI, "3", "", "");
         this.addCustomerDescriptionLevel(RareCustomers.YUYUKO_SAIGYOUJI, "5", "", "");
-        this.addCustomerDescriptionLevel(RareCustomers.MENG_CHENGGUO, "1", "", "MC幻想乡的板娘，通过“联动之门”穿越过来的异世界人，同时也担当驻夜雀食堂的形象大使，不断邀请着夜雀食堂世界的居民去MC幻想乡做客，积极的推进着两边的生态发展中。");
-        this.addCustomerDescriptionLevel(RareCustomers.MENG_CHENGGUO, "3", "", "");
-        this.addCustomerDescriptionLevel(RareCustomers.MENG_CHENGGUO, "5", "", "");
+        this.addCustomerDescriptionLevel(RareCustomers.MOESUMIKA, "1", "", "MC幻想乡的板娘，通过“联动之门”穿越过来的异世界人，同时也担当驻夜雀食堂的形象大使，不断邀请着夜雀食堂世界的居民去MC幻想乡做客，积极的推进着两边的生态发展中。");
+        this.addCustomerDescriptionLevel(RareCustomers.MOESUMIKA, "3", "", "");
+        this.addCustomerDescriptionLevel(RareCustomers.MOESUMIKA, "5", "", "");
         this.addCustomerDescriptionLevel(RareCustomers.THREE_FAIRIES, "1", "", "蹦蹦跳跳的三妖精讨伐大作战中的主角，通过“联动之门”穿越过来的异世界妖精。因为无尽的好奇心和行动力，在本世界也受到了大家的欢迎，看到她们就感到元气满满。");
         this.addCustomerDescriptionLevel(RareCustomers.THREE_FAIRIES, "3", "", "");
         this.addCustomerDescriptionLevel(RareCustomers.THREE_FAIRIES, "5", "", "");
@@ -2092,15 +2094,15 @@ public class NMILanguageProvider implements DataProvider {
         this.addEvaluation(RareCustomers.YUYUKO_SAIGYOUJI, CustomerEvaluationLevels.LACK_MONEY_NORMAL, "", "要结账了吗？我看看，这么多就够了吧。");
         this.addEvaluation(RareCustomers.YUYUKO_SAIGYOUJI, CustomerEvaluationLevels.REPELL, "", "我不会把你的店吃垮的啦。");
         this.addEvaluation(RareCustomers.YUYUKO_SAIGYOUJI, CustomerEvaluationLevels.SEEN_REPELL, "", "诶？小麻雀真没劲…");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.EX_BAD, "", "你们就拿这样的东西招待异世界的旅人吗？！");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.BAD, "", "我远道而来就为了个这？");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.NORM, "", "挺期待的，但也就那么回事吧。");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.GOOD, "", "好吃好吃！不枉我穿越通道来这边一次呀！");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.EX_GOOD, "", "太好吃了！我要介绍给我们世界的每一个人！");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.LACK_MONEY_ANGRY, "", "这边世界流行宰客吗？");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.LACK_MONEY_NORMAL, "", "啊，差点预算就被爆破了。");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.REPELL, "", "呜呜，我要找kk投诉你开黑店！");
-        this.addEvaluation(RareCustomers.MENG_CHENGGUO, CustomerEvaluationLevels.SEEN_REPELL, "", "哇——这个世界的老板娘这么生猛的吗！");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.EX_BAD, "", "你们就拿这样的东西招待异世界的旅人吗？！");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.BAD, "", "我远道而来就为了个这？");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.NORM, "", "挺期待的，但也就那么回事吧。");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.GOOD, "", "好吃好吃！不枉我穿越通道来这边一次呀！");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.EX_GOOD, "", "太好吃了！我要介绍给我们世界的每一个人！");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.LACK_MONEY_ANGRY, "", "这边世界流行宰客吗？");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.LACK_MONEY_NORMAL, "", "啊，差点预算就被爆破了。");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.REPELL, "", "呜呜，我要找kk投诉你开黑店！");
+        this.addEvaluation(RareCustomers.MOESUMIKA, CustomerEvaluationLevels.SEEN_REPELL, "", "哇——这个世界的老板娘这么生猛的吗！");
         this.addEvaluation(RareCustomers.THREE_FAIRIES, CustomerEvaluationLevels.EX_BAD, "", "这玩意儿！狗都不吃！");
         this.addEvaluation(RareCustomers.THREE_FAIRIES, CustomerEvaluationLevels.BAD, "", "拿这东西忽悠妖精你的良心不会痛吗？");
         this.addEvaluation(RareCustomers.THREE_FAIRIES, CustomerEvaluationLevels.NORM, "", "也就那么回事吧。");
@@ -2304,8 +2306,8 @@ public class NMILanguageProvider implements DataProvider {
         this.add(base.toLanguageKey("gui", suffix), en, cn);
     }
 
-    private void addJade(Identifier uid, String en, String cn){
-        this.add(Identifier.fromNamespaceAndPath("plugin_"+uid.getNamespace(), uid.getPath()).toLanguageKey("config.jade"),en,cn);
+    private void addJade(Identifier uid, String en, String cn) {
+        this.add(Identifier.fromNamespaceAndPath("plugin_" + uid.getNamespace(), uid.getPath()).toLanguageKey("config.jade"), en, cn);
     }
 
     @Override

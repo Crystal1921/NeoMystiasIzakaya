@@ -17,6 +17,7 @@ import icu.gensoukyo.neo_mystias_izakaya.common.blockentity.DiningTableBlockEnti
 import icu.gensoukyo.neo_mystias_izakaya.content.customer.CustomerMap;
 import icu.gensoukyo.neo_mystias_izakaya.content.customer.RareCustomer;
 import icu.gensoukyo.neo_mystias_izakaya.content.customer.RareCustomerHolder;
+import icu.gensoukyo.neo_mystias_izakaya.content.customer.consts.RareCustomers;
 import icu.gensoukyo.neo_mystias_izakaya.content.izakaya.IzakayaOrder;
 import icu.gensoukyo.neo_mystias_izakaya.registry.NMIMemoryTypes;
 import net.minecraft.core.BlockPos;
@@ -46,8 +47,15 @@ public class MaidPlaceOrderTask extends MaidCheckRateTask {
                 // 闭店时不得点餐
                 if (!isCanteenOpen(level, diningTableBlock)) return;
                 if (!diningTableBlock.isOccupied() && !diningTableBlock.isCD()) {
-                    Identifier maidModel = Identifier.parse(maid.getModelId());
-                    Identifier maidID = NeoMystiasIzakaya.id("customer/" + maidModel.getPath());
+                    // TLM 命名彩蛋：女仆名为 moesumika 时使用特殊模型（与 getModelId 不同），
+                    // 直接映射到对应的 MOESUMIKA 稀客
+                    Identifier maidID;
+                    if ("moesumika".equalsIgnoreCase(maid.getName().getString())) {
+                        maidID = RareCustomers.MOESUMIKA;
+                    } else {
+                        Identifier maidModel = Identifier.parse(maid.getModelId());
+                        maidID = NeoMystiasIzakaya.id("customer/" + maidModel.getPath());
+                    }
 
                     CustomerMap customerMap = NMIDataAccessor.server().getCustomerMap();
                     // 尝试匹配特定稀客，匹配不到则随机选一个

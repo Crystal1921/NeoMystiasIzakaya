@@ -62,7 +62,7 @@ public final class RareCustomers {
     public static final Identifier REMILIA_SCARLET = NeoMystiasIzakaya.id("customer/remilia_scarlet");
     public static final Identifier YOUMU_KONPAKU = NeoMystiasIzakaya.id("customer/konpaku_youmu");
     public static final Identifier YUYUKO_SAIGYOUJI = NeoMystiasIzakaya.id("customer/saigyouji_yuyuko");
-    public static final Identifier MENG_CHENGGUO = NeoMystiasIzakaya.id("customer/meng_chengguo");
+    public static final Identifier MOESUMIKA = NeoMystiasIzakaya.id("customer/moesumika");
     public static final Identifier THREE_FAIRIES = NeoMystiasIzakaya.id("customer/three_fairies");
     public static final Identifier RIN_SATSUKI = NeoMystiasIzakaya.id("customer/satsuki_rin");
     public static final Identifier SHIO_TACHISORA = NeoMystiasIzakaya.id("customer/shio_tachisora");
@@ -123,7 +123,7 @@ public final class RareCustomers {
             REMILIA_SCARLET,
             YOUMU_KONPAKU,
             YUYUKO_SAIGYOUJI,
-            MENG_CHENGGUO,
+            MOESUMIKA,
             THREE_FAIRIES,
             RIN_SATSUKI,
             SHIO_TACHISORA,

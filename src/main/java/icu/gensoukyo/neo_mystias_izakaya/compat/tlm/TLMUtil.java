@@ -8,7 +8,6 @@ package icu.gensoukyo.neo_mystias_izakaya.compat.tlm;
 import com.github.tartaricacid.touhoulittlemaid.TouhouLittleMaid;
 import com.github.tartaricacid.touhoulittlemaid.api.client.render.MaidRenderState;
 import com.github.tartaricacid.touhoulittlemaid.entity.chatbubble.implement.TextChatBubbleData;
-import com.github.tartaricacid.touhoulittlemaid.entity.item.EntityChair;
 import com.github.tartaricacid.touhoulittlemaid.entity.item.EntitySit;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.google.common.cache.Cache;
@@ -77,7 +76,7 @@ public class TLMUtil {
     public static void addMaidChatBauble(Entity entity, String textKey) {
         if (entity instanceof EntitySit entitySit
                 && entitySit.getFirstPassenger() instanceof EntityMaid entityMaid) {
-              entityMaid.getChatBubbleManager().addChatBubble(TextChatBubbleData.type2(Component.translatable(textKey)));
+            entityMaid.getChatBubbleManager().addChatBubble(TextChatBubbleData.type2(Component.translatable(textKey)));
         }
     }
 
@@ -85,11 +84,11 @@ public class TLMUtil {
      * 提取稀客对应的女仆渲染状态，用于在世界中渲染女仆。
      * 未安装 TLM 时返回 {@code null}。
      *
-     * @param level       客户端世界
-     * @param rareCustomer 稀客 ID（形如 {@code <modid>:customer/<model>}）
-     * @param partialTicks 部分 tick
+     * @param level                客户端世界
+     * @param rareCustomer         稀客 ID（形如 {@code <modid>:customer/<model>}）
+     * @param partialTicks         部分 tick
      * @param worldX/worldY/worldZ 女仆世界坐标
-     * @param yaw          女仆朝向（Minecraft 朝向，0=南，顺时针）
+     * @param yaw                  女仆朝向（Minecraft 朝向，0=南，顺时针）
      */
     public static @Nullable EntityRenderState extractMaidRenderState(ClientLevel level, Identifier rareCustomer, float partialTicks, double worldX, double worldY, double worldZ, float yaw) {
         if (!ModList.get().isLoaded("touhou_little_maid")) {
