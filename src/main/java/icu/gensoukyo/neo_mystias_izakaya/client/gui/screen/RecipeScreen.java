@@ -42,7 +42,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -633,7 +632,7 @@ public class RecipeScreen extends Screen {
             descY += lineHeight;
         }
 
-        if (ModList.get().isLoaded("touhou_little_maid")) {
+        if (TLMUtil.isTouhouLittleMaid()) {
             TLMUtil.renderMaid(guiGraphics, mouseX, mouseY, key, this.width, this.height, this.imageWidth, this.imageHeight);
         }
     }

@@ -27,6 +27,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -108,6 +109,14 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
      * 女仆用餐时所坐的 EntitySit 的 UUID（用于检测女仆是否离席）
      */
     private UUID seatEntityId = null;
+
+    /**
+     * 是否已有女仆入座（订单由女仆发起）；未入座时为 {@code null}
+     */
+    @Nullable
+    public UUID getSeatEntityId() {
+        return this.seatEntityId;
+    }
 
     private static final RandomSource random = RandomSource.create(943);
 
@@ -253,6 +262,7 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
             output.store("Order", IzakayaOrder.CODEC, this.currentOrder);
         }
         output.putLong("VillagerSeed", this.villagerSeed);
+        output.storeNullable("SeatEntityId", UUIDUtil.CODEC, this.seatEntityId);
     }
 
     // === 网络同步 ===
@@ -271,6 +281,7 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
         this.controllerPos = input.read("ControllerPos", BlockPos.CODEC).orElse(BlockPos.ZERO);
         this.currentOrder = input.read("Order", IzakayaOrder.CODEC).orElse(IzakayaOrder.EMPTY);
         this.villagerSeed = input.getLongOr("VillagerSeed", 0L);
+        this.seatEntityId = input.read("SeatEntityId", UUIDUtil.CODEC).orElse(null);
     }
 
     @Override
@@ -294,6 +305,7 @@ public class DiningTableBlockEntity extends RandomizableContainerBlockEntity {
                 output.store("Order", IzakayaOrder.CODEC, this.currentOrder);
             }
             output.putLong("VillagerSeed", this.villagerSeed);
+            output.storeNullable("SeatEntityId", UUIDUtil.CODEC, this.seatEntityId);
             return output.buildResult();
         }
     }

@@ -6,6 +6,7 @@
 package icu.gensoukyo.neo_mystias_izakaya.compat.tlm.task;
 
 import com.github.tartaricacid.touhoulittlemaid.entity.ai.brain.task.MaidCheckRateTask;
+import com.github.tartaricacid.touhoulittlemaid.entity.item.EntitySit;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.tartaricacid.touhoulittlemaid.init.InitBrains;
 import com.google.common.collect.ImmutableMap;
@@ -65,6 +66,12 @@ public class MaidPlaceOrderTask extends MaidCheckRateTask {
                             Identifier cuisineId = likes.get(level.getRandom().nextInt(likes.size()));
                             Identifier beverageId = beverages.get(level.getRandom().nextInt(beverages.size()));
                             IzakayaOrder order = new IzakayaOrder(cuisineId, beverageId, holder.key(), true);
+                            // 每次点单都重新写入女仆座位 UUID：
+                            // 防止闭店清桌（clear 会置空 seatEntityId）后，女仆仍在座却再次点单时
+                            // seatEntityId 丢失，导致渲染器误判为非女仆发起而额外渲染假女仆
+                            if (maid.getVehicle() instanceof EntitySit sit) {
+                                diningTableBlock.setSeatEntityId(sit.getUUID());
+                            }
                             diningTableBlock.seatCustomer(order);
                         }
                     }
