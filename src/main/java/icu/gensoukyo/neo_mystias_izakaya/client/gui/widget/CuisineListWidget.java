@@ -148,7 +148,6 @@ public class CuisineListWidget extends ObjectSelectionList<CuisineListWidget.Dis
                 CustomerHolder customer = getCustomer();
                 Identifier key = customer.key();
                 graphics.text(font, Component.translatable("customer.neo_mystias_izakaya." + key.getPath()), getX() + 18, getY() + 4, 0xFFFFFFFF);
-                graphics.item(Items.PLAYER_HEAD.getDefaultInstance(), getX(), getY());
             } else if (isItem()) {
                 ItemStack stack = getItemStack();
                 graphics.text(font, Component.translatable(stack.getItem().getDescriptionId()), getX() + 18, getY() + 4, 0xFFFFFFFF);
