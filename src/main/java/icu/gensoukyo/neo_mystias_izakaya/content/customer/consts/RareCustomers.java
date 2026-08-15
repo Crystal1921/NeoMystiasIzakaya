@@ -10,6 +10,7 @@ import net.minecraft.resources.Identifier;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public final class RareCustomers {
 
@@ -133,5 +134,13 @@ public final class RareCustomers {
             KOISHI_KOMEIJI,
             MAMIZOU_FUTATSUIWA,
             YUKARI_YAKUMO
+    );
+
+    /** 没有对应模型、随机选取时应排除的稀客（露易兹、爱莲、立空汐、蹦蹦跳跳三妖精） */
+    public static final Set<Identifier> NO_MODEL_CUSTOMERS = Set.of(
+            LOUISE,
+            ELLEN,
+            SHIO_TACHISORA,
+            THREE_FAIRIES
     );
 }

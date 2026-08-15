@@ -15,6 +15,7 @@ import icu.gensoukyo.neo_mystias_izakaya.content.customer.Customer;
 import icu.gensoukyo.neo_mystias_izakaya.content.customer.CustomerHolder;
 import icu.gensoukyo.neo_mystias_izakaya.content.customer.CustomerMap;
 import icu.gensoukyo.neo_mystias_izakaya.content.customer.RareCustomerHolder;
+import icu.gensoukyo.neo_mystias_izakaya.content.customer.consts.RareCustomers;
 import icu.gensoukyo.neo_mystias_izakaya.content.recipe.NMIRecipeMap;
 import icu.gensoukyo.neo_mystias_izakaya.content.tag.ItemTagList;
 import icu.gensoukyo.neo_mystias_izakaya.content.tag.TagItemListMap;
@@ -129,7 +130,10 @@ public final class CanteenOrderUtil {
         List<? extends CustomerHolder> pool;
 
         if (isRare) {
-            pool = customerMap.getRareCustomers();
+            // 排除没有对应模型的稀客（露易兹、爱莲、立空汐、蹦蹦跳跳三妖精）
+            pool = customerMap.getRareCustomers().stream()
+                    .filter(h -> !RareCustomers.NO_MODEL_CUSTOMERS.contains(h.key()))
+                    .toList();
             if (pool.isEmpty()) pool = customerMap.getCommonCustomers();
         } else {
             pool = customerMap.getCommonCustomers();

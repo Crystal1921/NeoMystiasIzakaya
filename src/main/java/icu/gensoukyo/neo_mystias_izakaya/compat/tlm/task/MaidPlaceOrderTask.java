@@ -61,7 +61,10 @@ public class MaidPlaceOrderTask extends MaidCheckRateTask {
                     // 尝试匹配特定稀客，匹配不到则随机选一个
                     RareCustomerHolder holder = customerMap.getRareCustomerMap().get(maidID);
                     if (holder == null) {
-                        List<RareCustomerHolder> rareList = customerMap.getRareCustomers();
+                        // 随机选取时排除没有对应模型的稀客（露易兹、爱莲、立空汐、蹦蹦跳跳三妖精）
+                        List<RareCustomerHolder> rareList = customerMap.getRareCustomers().stream()
+                                .filter(h -> !RareCustomers.NO_MODEL_CUSTOMERS.contains(h.key()))
+                                .toList();
                         if (!rareList.isEmpty()) {
                             holder = rareList.get(level.getRandom().nextInt(rareList.size()));
                         }
