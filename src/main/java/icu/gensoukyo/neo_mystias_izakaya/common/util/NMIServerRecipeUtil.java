@@ -69,13 +69,13 @@ public final class NMIServerRecipeUtil {
     public static List<NMIRecipeHolder> getRecipesByInputAndKitchenware(@Nullable LivingEntity player, List<ItemStack> input, TagKey<Block> kitchenware) {
         Set<Identifier> inputRecipeIds = new HashSet<>();
         for (ItemStack stack : input) {
-            List<Identifier> identifiers = NMIDataAccessor.client().getRecipeMap().getInputItemToRecipeMap().get(NMICommonItemStackUtil.get(stack));
+            List<Identifier> identifiers = NMIDataAccessor.server().getRecipeMap().getInputItemToRecipeMap().get(NMICommonItemStackUtil.get(stack));
             if (identifiers != null) {
                 inputRecipeIds.addAll(identifiers);
             }
         }
 
-        List<Identifier> kitchenwareRecipeIds = NMIDataAccessor.client().getRecipeMap().getKitchenwareToRecipeMap().get(kitchenware);
+        List<Identifier> kitchenwareRecipeIds = NMIDataAccessor.server().getRecipeMap().getKitchenwareToRecipeMap().get(kitchenware);
         if (kitchenwareRecipeIds != null) {
             inputRecipeIds.retainAll(kitchenwareRecipeIds);
         } else {
