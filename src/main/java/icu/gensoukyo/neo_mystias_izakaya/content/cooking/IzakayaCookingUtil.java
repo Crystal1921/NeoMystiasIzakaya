@@ -126,7 +126,7 @@ public final class IzakayaCookingUtil {
             IzakayaCookingEvent.Trigger post = NeoForge.EVENT_BUS.post(new IzakayaCookingEvent.Trigger(player, kitchenware));
             if (post.isCanceled()) return;
 
-            List<NMIRecipeHolder> recipes = NMIServerRecipeUtil.getRecipesByInputAndKitchenware(player, kitchenware.getIngredientItems(), NMIKitchenware.REGISTRY.getValue(kitchenware.getKitchenwareTypeId()).blockTagKey());
+            List<NMIRecipeHolder> recipes = NMIServerRecipeUtil.getRecipesByInputAndKitchenwareMatchAllInput(player, kitchenware.getIngredientItems(), NMIKitchenware.REGISTRY.getValue(kitchenware.getKitchenwareTypeId()).blockTagKey());
 
             boolean valid = recipes.stream().anyMatch(holder -> holder.key().equals(recipe));
 

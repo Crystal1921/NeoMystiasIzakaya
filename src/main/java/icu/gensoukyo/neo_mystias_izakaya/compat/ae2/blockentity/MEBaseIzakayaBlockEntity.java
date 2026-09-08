@@ -5,90 +5,44 @@
 
 package icu.gensoukyo.neo_mystias_izakaya.compat.ae2.blockentity;
 
-import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
-import appeng.api.networking.IGridNodeListener;
-import appeng.api.networking.IManagedGridNode;
+import appeng.api.networking.ticking.IGridTickable;
+import appeng.api.networking.ticking.TickRateModulation;
+import appeng.api.networking.ticking.TickingRequest;
 import appeng.api.util.AECableType;
 import appeng.blockentity.grid.AENetworkedBlockEntity;
-import appeng.helpers.InterfaceLogic;
-import appeng.helpers.InterfaceLogicHost;
-import appeng.me.helpers.BlockEntityNodeListener;
+import appeng.core.settings.TickRates;
+import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.resource.MEStorageInvHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.transfer.EmptyResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 
-import java.util.List;
+import java.util.EnumSet;
 
-public abstract class MEBaseIzakayaBlockEntity extends AENetworkedBlockEntity implements InterfaceLogicHost {
+public abstract class MEBaseIzakayaBlockEntity extends AENetworkedBlockEntity  {
 
-    private static final IGridNodeListener<MEBaseIzakayaBlockEntity> NODE_LISTENER = new BlockEntityNodeListener<>() {
-        @Override
-        public void onGridChanged(MEBaseIzakayaBlockEntity nodeOwner, IGridNode node) {
-            nodeOwner.logic.gridChanged();
-        }
-    };
 
     public MEBaseIzakayaBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-    }
-
-    private final InterfaceLogic logic = createLogic();
-
-    protected InterfaceLogic createLogic() {
-        return new InterfaceLogic(getMainNode(), this, getItemFromBlockEntity().asItem(),0);
+        getMainNode()
+                .setIdlePowerUsage(0);
     }
 
     @Override
-    protected IManagedGridNode createMainNode() {
-        return GridHelper.createManagedNode(this, NODE_LISTENER);
+    public void onReady() {
+        super.onReady();
+        getMainNode().setExposedOnSides(EnumSet.allOf(Direction.class));
     }
 
-    @Override
-    public InterfaceLogic getInterfaceLogic() {
-        return logic;
-    }
-
-    @Override
-    public void onMainNodeStateChanged(IGridNodeListener.State reason) {
-        if (getMainNode().hasGridBooted()) {
-            this.logic.notifyNeighbors();
+    public ResourceHandler<ItemResource> getItemHandler() {
+        if(getMainNode().getGrid() == null){
+            return EmptyResourceHandler.instance();
         }
+        return new MEStorageInvHandler(getMainNode().getGrid().getStorageService().getInventory());
     }
-
-    @Override
-    public void addAdditionalDrops(Level level, BlockPos pos, List<ItemStack> drops) {
-        super.addAdditionalDrops(level, pos, drops);
-        this.logic.addDrops(drops);
-    }
-
-    @Override
-    public void clearContent() {
-        super.clearContent();
-        this.logic.clearContent();
-    }
-
-    @Override
-    public void saveAdditional(ValueOutput data) {
-        super.saveAdditional(data);
-        this.logic.writeToNBT(data);
-    }
-
-    @Override
-    public void loadTag(ValueInput data) {
-        super.loadTag(data);
-        this.logic.readFromNBT(data);
-    }
-
-    @Override
-    public AECableType getCableConnectionType(Direction dir) {
-        return this.logic.getCableConnectionType(dir);
-    }
-
 
 }

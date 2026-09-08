@@ -29,7 +29,7 @@ public class MystiasJEIRecipeManagerPlugin implements ISimpleRecipeManagerPlugin
         ItemStack itemStack = input.getIngredient(VanillaTypes.ITEM_STACK)
                 .orElse(null);
         if(itemStack==null)return false;
-        return !NMIClientRecipeUtil.getRecipesByInputAndKitchenware(null,List.of(itemStack), kitchenware.blockTagKey()).isEmpty();
+        return !NMIClientRecipeUtil.getRecipesByInputAndKitchenwareMatchAnyInput(null,List.of(itemStack), kitchenware.blockTagKey()).isEmpty();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MystiasJEIRecipeManagerPlugin implements ISimpleRecipeManagerPlugin
         ItemStack itemStack = input.getIngredient(VanillaTypes.ITEM_STACK)
                 .orElse(null);
         if(itemStack==null)return List.of();
-        return NMICommonRecipeUtil.unWarp(NMIClientRecipeUtil.getRecipesByInputAndKitchenware(null,List.of(itemStack), kitchenware.blockTagKey()));
+        return NMICommonRecipeUtil.unWarp(NMIClientRecipeUtil.getRecipesByInputAndKitchenwareMatchAnyInput(null,List.of(itemStack), kitchenware.blockTagKey()));
     }
 
     @Override

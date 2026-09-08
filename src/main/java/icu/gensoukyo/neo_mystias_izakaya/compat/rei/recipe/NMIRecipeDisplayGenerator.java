@@ -43,7 +43,7 @@ public class NMIRecipeDisplayGenerator<T extends Display> implements DynamicDisp
     public Optional<List<T>> getUsageFor(EntryStack<?> entry) {
         if (entry.getType() == VanillaEntryTypes.ITEM) {
             Identifier identifier = entry.getIdentifier();
-            List<NMIRecipeHolder> byInput = NMIClientRecipeUtil.getRecipesByInputAndKitchenware(Minecraft.getInstance().player, List.of(NMICommonItemStackUtil.get(identifier)),kitchenware.blockTagKey());
+            List<NMIRecipeHolder> byInput = NMIClientRecipeUtil.getRecipesByInputAndKitchenwareMatchAnyInput(Minecraft.getInstance().player, List.of(NMICommonItemStackUtil.get(identifier)),kitchenware.blockTagKey());
             List<T> display = new ArrayList<>(byInput.stream().map(NMIRecipeHolder::recipe).map(builder).toList());
             if (NMICommonItemUtil.get(kitchenware.kitchenwareItem()).equals(identifier)) {
                 NMIClientRecipeUtil.getRecipesByKitchenware(Minecraft.getInstance().player, kitchenware.blockTagKey()).stream().map(NMIRecipeHolder::recipe).map(builder).forEach(display::add);

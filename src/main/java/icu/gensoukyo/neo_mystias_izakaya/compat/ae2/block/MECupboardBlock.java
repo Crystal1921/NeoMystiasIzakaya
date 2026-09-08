@@ -7,8 +7,11 @@ package icu.gensoukyo.neo_mystias_izakaya.compat.ae2.block;
 
 import appeng.block.AEBaseEntityBlock;
 import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.blockentity.MECupboardBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;

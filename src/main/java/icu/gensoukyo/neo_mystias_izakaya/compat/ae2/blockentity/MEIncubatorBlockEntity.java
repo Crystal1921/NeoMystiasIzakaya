@@ -6,14 +6,9 @@
 package icu.gensoukyo.neo_mystias_izakaya.compat.ae2.blockentity;
 
 import icu.gensoukyo.neo_mystias_izakaya.api.common.IIncubator;
-import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.registry.NMIMEItems;
-import icu.gensoukyo.neo_mystias_izakaya.compat.ae2.resource.MEStorageInvHandler;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.item.ItemResource;
 
 public class MEIncubatorBlockEntity extends MEBaseIzakayaBlockEntity implements IIncubator {
 
@@ -21,13 +16,4 @@ public class MEIncubatorBlockEntity extends MEBaseIzakayaBlockEntity implements 
         super(blockEntityType, pos, blockState);
     }
 
-    @Override
-    public ItemStack getMainMenuIcon() {
-        return NMIMEItems.ME_CUPBOARD.toStack();
-    }
-
-    @Override
-    public ResourceHandler<ItemResource> getItemHandler() {
-        return new MEStorageInvHandler(getInterfaceLogic().getInventory());
-    }
 }

@@ -35,7 +35,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.transfer.item.ItemResource;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class KitchenwareScreen extends AbstractContainerScreen<KitchenwareMenu> 
     public KitchenwareScreen(KitchenwareMenu menu, Inventory inv, Component title) {
         super(menu, inv, title, 230, 219);
         this.kitchenwareBE = this.getMenu().getKitchenwareBE();
-        this.possibleRecipes = NMIClientRecipeUtil.getRecipesByInputAndKitchenware(NMIClientUtil.getPlayer(), List.copyOf(kitchenwareBE.getItems()), NMIKitchenware.REGISTRY.getValue(kitchenwareBE.getKitchenwareTypeId()).blockTagKey());
+        this.possibleRecipes = NMIClientRecipeUtil.getRecipesByInputAndKitchenwareMatchAllInput(NMIClientUtil.getPlayer(), List.copyOf(kitchenwareBE.getItems()), NMIKitchenware.REGISTRY.getValue(kitchenwareBE.getKitchenwareTypeId()).blockTagKey());
 
     }
 
@@ -257,7 +256,7 @@ public class KitchenwareScreen extends AbstractContainerScreen<KitchenwareMenu> 
     }
 
     public void updateRecipes() {
-        this.possibleRecipes = NMIClientRecipeUtil.getRecipesByInputAndKitchenware(NMIClientUtil.getPlayer(), List.copyOf(kitchenwareBE.getItems()), NMIKitchenware.REGISTRY.getValue(kitchenwareBE.getKitchenwareTypeId()).blockTagKey());
+        this.possibleRecipes = NMIClientRecipeUtil.getRecipesByInputAndKitchenwareMatchAllInput(NMIClientUtil.getPlayer(), List.copyOf(kitchenwareBE.getItems()), NMIKitchenware.REGISTRY.getValue(kitchenwareBE.getKitchenwareTypeId()).blockTagKey());
     }
 
     @Override
