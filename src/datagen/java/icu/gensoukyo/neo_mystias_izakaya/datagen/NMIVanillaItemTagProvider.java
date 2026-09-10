@@ -38,7 +38,8 @@ public class NMIVanillaItemTagProvider extends ItemTagsProvider {
                 Items.EGG,
                 Items.ICE,
                 Items.HONEY_BOTTLE,
-                Items.COCOA_BEANS
+                Items.COCOA_BEANS,
+                NMIMainItems.CHROME_BALL.get()
         );
         NMIBeveragesItems.ITEM_LIST.forEach(item -> tag(NMIVanillaTags.BEVERAGES).add(item.get()));
         NMICuisinesItems.ITEM_LIST.forEach(item -> tag(NMIVanillaTags.CUISINES).add(item.get()));
