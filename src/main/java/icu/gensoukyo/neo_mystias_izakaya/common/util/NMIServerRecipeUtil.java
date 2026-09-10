@@ -8,6 +8,7 @@ package icu.gensoukyo.neo_mystias_izakaya.common.util;
 import icu.gensoukyo.neo_mystias_izakaya.api.dal.NMIDataAccessor;
 import icu.gensoukyo.neo_mystias_izakaya.api.event.server.cooking.IzakayaRecipeEvent;
 import icu.gensoukyo.neo_mystias_izakaya.client.dal.ClientNMIDataAccessor;
+import icu.gensoukyo.neo_mystias_izakaya.common.dal.ServerNMIDataAccessor;
 import icu.gensoukyo.neo_mystias_izakaya.content.recipe.NMIRecipeHolder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
@@ -151,6 +152,6 @@ public final class NMIServerRecipeUtil {
 
     public static boolean isCuisine(ItemStack stack) {
         Identifier itemId = NMICommonItemStackUtil.get(stack);
-        return ClientNMIDataAccessor.INSTANCE.getRecipeMap().getOutputItemToRecipeMap().containsKey(itemId);
+        return ServerNMIDataAccessor.INSTANCE.getRecipeMap().getOutputItemToRecipeMap().containsKey(itemId);
     }
 }
